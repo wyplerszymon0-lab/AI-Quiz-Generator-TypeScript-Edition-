@@ -10,10 +10,11 @@ export class QuizAgent {
 
     async generateQuiz(topic: string, count: number = 3): Promise<Quiz | null> {
         const systemPrompt = `
-            Jesteś ekspertem edukacyjnym. Generujesz quizy w formacie JSON.
-            Każdy quiz musi zawierać tytuł, temat oraz listę pytań.
-            Każde pytanie musi mieć 4 opcje, jedną poprawną odpowiedź i krótkie wyjaśnienie.
-            ODPOWIADAJ WYŁĄCZNIE W FORMACIE JSON.
+            You are an educational expert. Your task is to generate high-quality quizzes in JSON format.
+            Each quiz must include a title, a topic, and a list of questions.
+            Each question must have 4 multiple-choice options, one correct answer, and a brief educational explanation.
+            LANGUAGE: Always respond in English.
+            FORMAT: Respond ONLY with a valid JSON object.
         `;
 
         try {
@@ -21,15 +22,15 @@ export class QuizAgent {
                 model: "gpt-4o",
                 messages: [
                     { role: "system", content: systemPrompt },
-                    { role: "user", content: `Stwórz quiz na temat: ${topic}. Liczba pytań: ${count}.` }
+                    { role: "user", content: `Generate a quiz about: ${topic}. Number of questions: ${count}.` }
                 ],
-                response_format: { type: "json_object" } // Wymuszamy JSON
+                response_format: { type: "json_object" } // Enforce JSON output
             });
 
             const content = response.choices[0].message.content;
             return content ? JSON.parse(content) : null;
         } catch (error) {
-            console.error("Błąd generowania quizu:", error);
+            console.error("Quiz Generation Error:", error);
             return null;
         }
     }
