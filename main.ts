@@ -4,7 +4,7 @@ const API_KEY = 'YOUR_OPENAI_API_KEY_HERE';
 const agent = new QuizAgent(API_KEY);
 
 async function start() {
-    console.log("🚀 Generating a quiz about TypeScript & Node.js...");
+    console.log(" Generating a quiz about TypeScript & Node.js...");
     
     const quiz = await agent.generateQuiz("TypeScript and Node.js Development", 3);
 
@@ -25,7 +25,7 @@ async function start() {
             if (q.explanation) {
                 console.log(`   💡 Explanation: ${q.explanation}\n`);
             } else {
-                console.log(""); // Just a newline
+                console.log(""); 
             }
         });
         
