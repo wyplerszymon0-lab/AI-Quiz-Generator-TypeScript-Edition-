@@ -24,7 +24,7 @@ export class QuizAgent {
                     { role: "system", content: systemPrompt },
                     { role: "user", content: `Generate a quiz about: ${topic}. Number of questions: ${count}.` }
                 ],
-                response_format: { type: "json_object" } // Enforce JSON output
+                response_format: { type: "json_object" } 
             });
 
             const content = response.choices[0].message.content;
